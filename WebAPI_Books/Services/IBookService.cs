@@ -6,16 +6,15 @@ using WebAPI_Books.Models;
 
 namespace WebAPI_Books.Services
 {
-    interface IBookService
+     public interface IBookService
     {
 
 
-        public List<Books> GetBooks();
+        public string GetBooks();
 
+        public string AddBook(string book);
 
-        public Books AddBook(Books book);
-
-        public  Books GetBookByID(int Id);
+        public  string GetBookByID(int Id);
 
         public Books  UpdateBookByID(int Id);
 

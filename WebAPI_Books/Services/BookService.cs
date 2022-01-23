@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using WebAPI_Books.Models;
 
@@ -13,11 +15,16 @@ namespace WebAPI_Books.Services
     
    
     public class BookService : IBookService
+    { 
+         private string CLARO_API = "https://fakerestapi.azurewebsites.net/api/v1/Books";
 
+
+        public string AddBook(string book)
         {
-        public Books AddBook(Books book)
-        {
-            throw new NotImplementedException();
+            var wb = new WebClient();
+            wb.Headers.Add("Content-Type", "application/json");
+            return wb.UploadString(CLARO_API, book);
+            
         }
 
         public Books DeleteBookByID(int id)
@@ -25,18 +32,26 @@ namespace WebAPI_Books.Services
             throw new NotImplementedException();
         }
 
-        public Books GetBookByID(int Id)
+        public string GetBookByID(int Id)
         {
-            throw new NotImplementedException();
-        }
-        [HttpGet]
-        //Obtenemos la lista de libros
-        public  List<Books> GetBooks(Books book)
-        {
-             var url = "https://fakerestapi.azurewebsites.net/api/v1/Books";
-             HttpClient client  = new HttpClient();
+            string url = "https://fakerestapi.azurewebsites.net/api/v1/Books/" + Id;
+            WebClient client = new WebClient();
+            string response = client.DownloadString(url);
 
-            return await(Books);
+            return response;
+
+        }
+        
+        //Obtenemos la lista de libros
+        public string  GetBooks()
+        {
+             string url = "https://fakerestapi.azurewebsites.net/api/v1/Books";
+             WebClient client = new WebClient();
+            string response = client.DownloadString(url);
+
+            return response;
+
+            
         }
 
         public Books UpdateBookByID(int Id)
