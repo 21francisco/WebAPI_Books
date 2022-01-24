@@ -12,8 +12,8 @@ namespace WebAPI_Books.Controllers
 
         private IBookService _bookService;
 
-        public BookController(IBookService bookService) 
-        
+        public BookController(IBookService bookService)
+
         {
             _bookService = bookService;
         }
@@ -21,9 +21,9 @@ namespace WebAPI_Books.Controllers
         [HttpGet]
         public ActionResult<string> IndeX()
         {
-            return _bookService.GetBooks();            
+            return _bookService.GetBooks();
         }
-        
+
         [HttpPost]
         public ActionResult<string> AddBook([FromBody] JsonElement bookAsJson)
         {
@@ -31,10 +31,30 @@ namespace WebAPI_Books.Controllers
         }
         [Route("{id}")]
         [HttpGet]
-         public ActionResult<string> GetBookById (int id)
+        public ActionResult<string> GetBookById(int id)
         {
-            
+
             return _bookService.GetBookByID(id);
         }
+
+        
+        [HttpPut]
+        public ActionResult<string> UpdateBookByID([FromBody] JsonElement bookAsJson)
+        {
+
+            return _bookService.UpdateBookByID(bookAsJson.ToString());
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+
+        public ActionResult<string> DeleteDeleteBookByID(string id)         
+        {
+           
+            return _bookService.DeleteBookByID(id);
+            
+        }
+
+
     }
 }

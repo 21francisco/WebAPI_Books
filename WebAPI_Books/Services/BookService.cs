@@ -27,17 +27,26 @@ namespace WebAPI_Books.Services
             
         }
 
-        public Books DeleteBookByID(int id)
+        public string DeleteBookByID(string id)
         {
-            throw new NotImplementedException();
+           
+            string method = "Delete";
+            WebClient client = new WebClient();
+            string response = client.UploadString(CLARO_API,method,id);
+
+            Console.WriteLine("Delete");
+
+            return response;
+
+            
         }
 
         public string GetBookByID(int Id)
         {
-            string url = "https://fakerestapi.azurewebsites.net/api/v1/Books/" + Id;
+            
             WebClient client = new WebClient();
-            string response = client.DownloadString(url);
-
+            string response = client.DownloadString(CLARO_API);
+            
             return response;
 
         }
@@ -45,19 +54,25 @@ namespace WebAPI_Books.Services
         //Obtenemos la lista de libros
         public string  GetBooks()
         {
-             string url = "https://fakerestapi.azurewebsites.net/api/v1/Books";
+             
              WebClient client = new WebClient();
-            string response = client.DownloadString(url);
+            string response = client.DownloadString(CLARO_API);
 
             return response;
 
             
         }
 
-        public Books UpdateBookByID(int Id)
+        public string UpdateBookByID(string book)
         {
-            throw new NotImplementedException();
+            string method = "Put";
+            var wb = new WebClient();
+            wb.Headers.Add("Content-Type", "application/json");
+            Console.WriteLine("Update");
+            return wb.UploadString(CLARO_API,method,book);            
         }
+
+        
     }
 }
 

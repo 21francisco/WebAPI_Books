@@ -16,9 +16,9 @@ namespace WebAPI_Books.Services
 
         public  string GetBookByID(int Id);
 
-        public Books  UpdateBookByID(int Id);
+        public string  UpdateBookByID(string book);
 
-        public Books  DeleteBookByID(int id);
+        public string  DeleteBookByID(string id);
 
 
 
