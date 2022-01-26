@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net.Mime;
 using System.Text.Json;
 using WebAPI_Books.Services;
 
@@ -27,13 +28,15 @@ namespace WebAPI_Books.Controllers
         [HttpPost]
         public ActionResult<string> AddBook([FromBody] JsonElement bookAsJson)
         {
+            Console.WriteLine(bookAsJson.ToString());
             return _bookService.AddBook(bookAsJson.ToString());
+
         }
+
         [Route("{id}")]
         [HttpGet]
         public ActionResult<string> GetBookById(int id)
         {
-
             return _bookService.GetBookByID(id);
         }
 

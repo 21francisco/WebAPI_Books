@@ -23,8 +23,9 @@ namespace WebAPI_Books.Services
         {
             var wb = new WebClient();
             wb.Headers.Add("Content-Type", "application/json");
-            return wb.UploadString(CLARO_API, book);
-            
+            Console.WriteLine(wb.UploadString(CLARO_API, "POST", book));
+            Console.WriteLine("Book: {0}", book);
+            return wb.UploadString(CLARO_API, "POST", book);
         }
 
         public string DeleteBookByID(string id)
